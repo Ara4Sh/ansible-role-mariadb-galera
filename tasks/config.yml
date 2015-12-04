@@ -14,6 +14,7 @@
   template: src=galera.cnf.j2 dest=/etc/mysql/conf.d/galera.cnf owner=root group=root mode=0644
 
 - name: Bootstraping the Cluster
+  debug: msg="Bootstraping the Cluster"
   notify: bootstrap node
   when: ansible_hostname == '{{ bootstrap_node }}'
 
