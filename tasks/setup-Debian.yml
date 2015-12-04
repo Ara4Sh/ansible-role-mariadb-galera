@@ -4,10 +4,6 @@
   stat: path=/etc/init.d/mysql
   register: mariadb_installed
 
-- name: Error if Mysql/Mariadb is already installed.
-  debug: msg="Oops !!! mysql or mariadb is already installed, Remove it first"
-  when: mariadb_installed_stat_exist
-
 - name: Adding Repository for mariadb
   include: repo.yml
   when: mariadb_installed.stat.exists == false
