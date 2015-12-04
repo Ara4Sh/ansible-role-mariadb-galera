@@ -29,10 +29,6 @@
 - include: setup-Ubuntu.yml
   when: ansible_os_family == 'Debian'
 
-- name: Check if mariadb/mysql packages were installed.
-  set_fact:
-    mariadb_install_packages: "{{ (rh_mariadb_install_packages is defined and rh_mariadb_install_packages.changed) or (deb_mariadb_install_packages is defined and deb_mariadb_install_packages.changed) }}"
-
 # Configure MariaDB.
 - include: config.yml
 # - include: secure-installation.yml # Not yet Ready
