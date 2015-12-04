@@ -1,6 +1,6 @@
 ---
 - name: Creating my.cnf
-  template: src=my.cnf.j2 dest={{ mariadb_config_file }} owner=root group=root mode=0644 force={{ overwrite_global_mycnf }}
+  template: src=my.cnf.j2 dest="{{ mariadb_config_file }}" owner=root group=root mode=0644 force="{{ overwrite_global_mycnf }}"
 
 - name: Create slow query log file (if configured).
   shell: "touch {{ mariadb_slow_query_log_file }} creates={{ mariadb_slow_query_log_file }}"

@@ -5,7 +5,7 @@
    name: maria-db-10.0
    question: "{{ item }}"
    vtype: password
-   value: {{ mariadb_root_password }}
+   value: "{{ mariadb_root_password }}"
   with_items:
    - mysql-server/root_password
    - mysql-server/root_password_again
