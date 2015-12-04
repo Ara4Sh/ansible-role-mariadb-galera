@@ -17,7 +17,7 @@
 
  # Prepare Debconf in Debian and Ubuntu
 - include: debconf.yml
-   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
  # Setup/install Tasks
 - include: setup-RedHat.yml

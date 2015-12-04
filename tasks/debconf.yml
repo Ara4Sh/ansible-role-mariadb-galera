@@ -1,11 +1,11 @@
 ---
 #Prepare Debconf
-  - name: DebConf asking for mariadb password
-   debconf:
-    name: maria-db-10.0
-    question: "{{ item }}"
-    vtype: password
-    value: {{ mariadb_root_password }}
-   with_items:
-    - mysql-server/root_password
-    - mysql-server/root_password_again
+- name: DebConf asking for mariadb password
+  debconf:
+   name: maria-db-10.0
+   question: "{{ item }}"
+   vtype: password
+   value: {{ mariadb_root_password }}
+  with_items:
+   - mysql-server/root_password
+   - mysql-server/root_password_again
