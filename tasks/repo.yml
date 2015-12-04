@@ -1,6 +1,6 @@
 ---
 - name: Nonintractive mode in Debian and Ubuntu
-  raw: export DEBIAN__FRONTEND = noninteractive
+  raw: export DEBIAN__FRONTEND=noninteractive
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Preparing Mariadb Sources
@@ -27,4 +27,3 @@
 - name: Adding CentOS Repo
   copy: src=mariadb.repo dest=/etc/yum.repos.d/ mode=644 owner=root group=root
   when: ansible_distribution == 'CentOS' and ansible_distribution_version == '7'
-
