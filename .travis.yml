@@ -51,3 +51,4 @@ script:
     | grep -q 'performance_schema'
     && (echo 'MySQL running normally' && exit 0)
     || (echo 'MySQL not running' && exit 1)
+#Trigger for travis
