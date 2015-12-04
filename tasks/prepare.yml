@@ -1,0 +1,7 @@
+---
+# Prepare /etc/hosts : please edit files/etc.hosts first
+- name: Adding nodes to /etc/hosts
+  copy: src=etc.hosts dest=/tmp mode=644 owner=root group=root
+- name: Updating /etc/hosts
+  raw: cat /tmp/etc.hosts >> /etc/hosts
+  register: etc.hosts_check

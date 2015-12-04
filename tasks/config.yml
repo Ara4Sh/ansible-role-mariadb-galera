@@ -1,0 +1,21 @@
+---
+- name: Creating my.cnf
+  template: src=my.cnf.j2 dest={{ mariadb_config_file }} owner=root group=root mode=0644 force={{ overwrite_global_mycnf }}
+
+- name: Create slow query log file (if configured).
+  shell: "touch {{ mariadb_slow_query_log_file }} creates={{ mariadb_slow_query_log_file }}"
+  when: mariadb_slow_query_log_enabled
+
+- name: Set ownership on slow query log file (if configured).
+  file: path="{{ mariadb_slow_query_log_file }}" state=file owner=mysql group=mysql mode=0644
+  when: mariadb_slow_query_log_enabled
+
+- name: Adding Galera Configuration
+  template: src=galera.cnf.j2 dest=/etc/mysql/conf.d/galera.cnf owner=root group=root mode=0644
+
+- name: Bootstraping the Cluster
+  notify: bootstrap node
+  only_if: ansible_hostname == '{{ bootstrap_node }}'
+
+- name: Finilizing the Installation
+  notify: restart mysql

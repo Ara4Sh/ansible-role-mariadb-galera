@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Arash Shams
+  description: An ansible role for Galera/Rsync
+  company: "Imen Daba Parsian"
+  license: Apache 2.0
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - precise
+    - saucy
+    - raring
+  - name: EL
+    - 6
+    - 7
+  categories:
+  - database
+  - database:sql
+  - clustering
+dependencies: []

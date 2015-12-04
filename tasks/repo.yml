@@ -1,0 +1,30 @@
+---
+- name: Nonintractive mode in Debian and Ubuntu
+  raw: export DEBIAN__FRONTEND = noninteractive
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Preparing Mariadb Sources
+  apt: name=software-properties-common state=present update_cache=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Adding Mariadb Keys
+  apt_key: id=0xcbcb082a1bb943db keyserver=hkp://keyserver.ubuntu.com:80 state=present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Adding Mariadb Keys
+  apt_key: id=0xcbcb082a1bb943db keyserver=keyserver.ubuntu.com state=present
+  when: ansible_distribution == 'Debian'
+
+- name: Adding Mariadb Sources
+  apt_repository: repo='deb http://mariadb.mirror.aasaam.ir/pub/mariadb/repo/10.0/ubuntu trusty main' state=present
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+
+- name: Adding Mariadb Sources
+  apt_repository: repo='deb http://mariadb.mirror.aasaam.ir/pub/mariadb/repo/10.0/debian jessie main'
+  when: ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie'
+
+# CentOS turn
+- name: Adding CentOS Repo
+  copy: src=mariadb.repo dest=/etc/yum.repos.d/ mode=644 owner=root group=root
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version == '7'
+

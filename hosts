@@ -1,0 +1,5 @@
+[dbservers]
+172.18.0.19 wsrep_node_name=galera1 wsrep_node_address=172.18.201.2
+172.18.0.20 wsrep_node_name=galera2 wsrep_node_address=172.18.201.3
+172.18.0.21 wsrep_node_name=galera3 wsrep_node_address=172.18.201.4
+172.18.0.22 wsrep_node_name=galera4 wsrep_node_address=172.18.201.5

@@ -1,0 +1,40 @@
+---
+- name: Include OS Variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define mariadb daemon.
+  set_fact:
+   mariadb_daemon: "{{ __mariadb_daemon }}"
+  when: mariadb_daemon is not defined
+
+- name: Define mariadb_slow_query_log_file.
+  set_fact:
+   mariadb_slow_query_log_file: "{{ __mariadb_slow_query_log_file }}"
+  when: mariadb_slow_query_log_file is not defined
+
+ # Prepare /etc/hosts
+- include: prepare.yml
+
+ # Prepare Debconf in Debian and Ubuntu
+- include: debconf.yml
+   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+ # Setup/install Tasks
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: setup-Ubuntu.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Check if mariadb/mysql packages were installed.
+  set_fact:
+    mariadb_install_packages: "{{ (rh_mariadb_install_packages is defined and rh_mariadb_install_packages.changed) or (deb_mariadb_install_packages is defined and deb_mariadb_install_packages.changed) }}"
+
+# Configure MariaDB.
+- include: config.yml
+# - include: secure-installation.yml # Not yet Ready
+- include: databases.yml
+- include: users.yml

@@ -1,0 +1,65 @@
+---
+#Mariadb Settings
+mariadb_datadir: /var/lib/mysql
+mariadb_pid_file: /var/run/mysqld/mysqld.pid
+#Connection Settings.
+mariadb_root_username: root
+mariadb_root_password: root
+mariadb_port: "3306"
+mariadb_bind_address: '0.0.0.0'
+
+#Slow query Settings
+mariadb_slow_query_log_enabled: no
+mariadb_slow_query_log_file: /var/log/mysql_slowquery.log
+mariadb_slowquery_time: 2
+
+#Memory Settings
+mariadb_key_buffer_size: "256M"
+mariadb_max_allowed_packet: "64M"
+mariadb_table_open_cache: "256"
+mariadb_sort_buffer_size: "1M"
+mariadb_read_buffer_size: "1M"
+mariadb_read_rnd_buffer_size: "4M"
+mariadb_myisam_sort_buffer_size: "64M"
+mariadb_thread_cache_size: "8"
+mariadb_query_cache_size: "16M"
+mariadb_max_connections: 151
+
+# InnoDB Settings.
+# Set .._buffer_pool_size up to 80% of RAM but beware of setting too high.
+mariadb_innodb_file_per_table: "1"
+mariadb_innodb_buffer_pool_size: "256M"
+mariadb_innodb_additional_mem_pool_size: "20M"
+# Set .._log_file_size to 25% of buffer pool size.
+mariadb_innodb_log_file_size: "64M"
+mariadb_innodb_log_buffer_size: "8M"
+mariadb_innodb_flush_log_at_trx_commit: "1"
+mariadb_innodb_lock_wait_timeout: 50
+
+# Try number of CPU's * 2 for thread_concurrency.
+mariadb_thread_concurrency: 2
+
+# Mysqldump Settings.
+mariadb_mysqldump_max_allowed_packet: "64M"
+
+#Other Settings
+mariadb_wait_timeout: 600
+
+# Databases.
+mariadb_databases: []
+# Full example:
+# mariadb_databases:
+#   - { name: example, collation: utf8_general_ci, encoding: utf8, replicate: 1 }
+
+# Users
+mariadb_users: []
+# Full Example:
+# mariadb_users:
+#   - { name: example, host: 127.0.0.1, password: secret, priv: *.*:USAGE }
+
+#Galera Settings
+wsrep_cluster_address: [galera1,galera2,galera3,galera4]
+wsrep_cluster_name: X_dev_cluster
+wsrep_sst_method: rsync
+wsrep_sst_donor: galera1
+bootstrap_node: galera1 #only hostname of your bootstraper.

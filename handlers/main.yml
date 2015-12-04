@@ -1,0 +1,7 @@
+---
+# Restart Mysql
+- name: restart mysql
+  command:  /etc/init.d/mysql restart
+
+- name: bootstrap node
+  command:  /etc/init.d/mysql start --wsrep-new-cluster

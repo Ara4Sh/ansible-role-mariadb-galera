@@ -1,0 +1,34 @@
+# MariaDB-specific config file for Galera cluster By Arash Shams <xsysxpert@gmail.com>
+# Read by /etc/mysql/my.cnf
+
+[client]
+# Default is Latin1, if you need UTF-8 set this (also in server section)
+#default-character-set = utf8
+
+[mysqld]
+#
+# * Character sets
+#
+# Default is Latin1, if you need UTF-8 set all this (also in client section)
+#
+character-set-server  = utf8
+collation-server      = utf8_general_ci
+character_set_server   = utf8
+collation_server       = utf8_general_ci
+wsrep_provider = /usr/lib/galera/libgalera_smm.so
+wsrep_provider_options = "gcache.size=1G; gcache.page_size=128M"
+wsrep_cluster_address = 'gcomm://{{ wsrep_cluster_address }}'
+wsrep_cluster_name = {{ wsrep_cluster_name }}
+wsrep_node_address = {{ wsrep_node_address }}
+wsrep_node_name = {{ wsrep_node_name }}
+wsrep_retry_autocommit = 0
+wsrep_sst_method = {{ wsrep_sst_method }}
+wsrep_sst_auth = root:{{ mariadb_root_password }}
+wsrep_provider_options = "evs.keepalive_period =PT3S; evs.inactive_check_period = PT10S; evs.suspect_timeout = PT30S; evs.inactive_timeout = PT1M; evs.install_timeout = PT1M;"
+wsrep_sst_donor = {{ wsrep_cluster_address }}
+binlog_format = ROW
+default_storage_engine = innodb
+innodb_autoinc_lock_mode = 2
+open_files_limit = 10240
+innodb_flush_log_at_trx_commit = 2
+innodb_locks_unsafe_for_binlog = 1
