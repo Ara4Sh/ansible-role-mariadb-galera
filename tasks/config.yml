@@ -15,7 +15,7 @@
 
 - name: Bootstraping the Cluster
   notify: bootstrap node
-  only_if: ansible_hostname == '{{ bootstrap_node }}'
+  when: ansible_hostname == '{{ bootstrap_node }}'
 
 - name: Finilizing the Installation
   notify: restart mysql
