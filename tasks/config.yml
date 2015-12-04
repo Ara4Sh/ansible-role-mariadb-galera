@@ -18,5 +18,6 @@
   notify: bootstrap node
   when: ansible_hostname == '{{ bootstrap_node }}'
 
-- name: Finilizing the Installation
+- name: Finalizing the Installation
+  debug: msg="Well done , installation finnished!"
   notify: restart mysql
