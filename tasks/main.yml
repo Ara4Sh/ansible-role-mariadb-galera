@@ -15,6 +15,9 @@
  # Prepare /etc/hosts
 - include: prepare.yml
 
+ #Add Repositories
+- include: repo.yml
+
  # Prepare Debconf in Debian and Ubuntu
 - include: debconf.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -32,5 +35,5 @@
 # Configure MariaDB.
 - include: config.yml
 # - include: secure-installation.yml # Not yet Ready
-- include: databases.yml
-- include: users.yml
+#- include: databases.yml
+#- include: users.yml

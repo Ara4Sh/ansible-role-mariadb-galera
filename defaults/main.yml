@@ -44,6 +44,7 @@ mariadb_mysqldump_max_allowed_packet: "64M"
 
 #Other Settings
 mariadb_wait_timeout: 600
+overwrite_global_mycnf: no
 
 # Databases.
 mariadb_databases: []
@@ -58,8 +59,11 @@ mariadb_users: []
 #   - { name: example, host: 127.0.0.1, password: secret, priv: *.*:USAGE }
 
 #Galera Settings
-wsrep_cluster_address: [galera1,galera2,galera3,galera4]
+wsrep_cluster_address: "'centos','ubuntu'"
 wsrep_cluster_name: X_dev_cluster
+wsrep_node_address: "{{ ansible_default_ipv4.address }}"
 wsrep_sst_method: rsync
-wsrep_sst_donor: galera1
-bootstrap_node: galera1 #only hostname of your bootstraper.
+wsrep_sst_donor: ubuntu
+bootstrap_node: ubuntu #only hostname of your bootstraper.
+
+#Attention : Setup wsrep_node_address in inventory file for each host

@@ -2,7 +2,8 @@
 __mariadb_daemon: mysqld
 __mariadb_packages:
   - MariaDB-client
-  - MariaDB-Galera-server
+  - MariaDB-server
+  - MySQL-python
   - rsync
 __mariadb_slow_query_log_file: /var/log/mysql-slow.log
 mariadb_config_file: /etc/my.cnf
